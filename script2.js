@@ -14,34 +14,40 @@ function validar() {
     if (fNombre && fEdad) {
         let persona = {
             nombre : vNombre,
-            edad : vEdad
+            edad : parseInt(vEdad)
         }
-        let personas = personas.push(persona)
+        personas.push(persona)
     }
-    cargarTabla()
+    cargarTabla(personas)
 }
 
-function validarNombre() {
+function validarNombre(elemento,valor,error) {
     return true
 }
 
-function validarEdad() {
+function validarEdad(elemento,valor,error) {
     return true
 }
 
 function cargarTabla() {
     let eTabla = document.getElementById('cuerpoTabla')
 
-    let strPersonas = personas.map((persona, index) => {
-        '<tr><td>'+persona.nombre+
+    let tablaPersonas = personas.map((persona, index) => {
+        persona = '<tr><td>'+persona.nombre+
         '</td><td>'+persona.edad+
-        '</td><td><button type="button" onclick="actualizarFormulario('+index+')" id="btnFormulario"></button>'+
-        '<button type="button" onclick="eliminar('+index+')"></button></td></tr>'
+        '</td><td><button type="button" onclick="actualizarFormulario('+index+')" id="btnFormulario">Actualizar</button>'+
+        '<button type="button" onclick="eliminar('+index+')">Eliminar</button></td></tr>'
+        return persona
     })
-    strPersonas = strPersonas.join('')
-    eTabla.innerHTML(strPersonas)
+    strPersonas = tablaPersonas.join('')
+    eTabla.innerHTML = strPersonas
 }
 
-function actualizarFormulario(indice) {
-
+function eliminar(indice) {
+    let p = personas.filter((persona, index)=>{
+        if (index == indice) {
+            return 
+        } else return persona
+    })
+    cargarTabla()
 }
