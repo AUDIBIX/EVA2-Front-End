@@ -66,6 +66,7 @@ function cargarTabla() {
 }
 
 function eliminar(indice) {
+    if (!(confirm('Porfavor confirme si desea borrar los datos correspondientes'))){return false}
     personas = personas.filter((p, index)=> {
         if (indice == index) {
             return false
